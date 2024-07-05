@@ -1,4 +1,5 @@
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
+import { handleError } from './utils';
 
 export const BASE_URL = 'http://localhost:3001';
 
@@ -7,20 +8,15 @@ export const fetchModules = async () => {
     const { data } = await axios.get<IModule[]>(`${BASE_URL}/modules`);
     return data;
   } catch (error) {
-    if (error instanceof AxiosError) {
-      console.log(error.response?.data);
-      throw new Error(
-        `[MODULES_ERROR]: ${error.response?.data.error_name} - ${error.response?.data.error_message}`
-      );
-    } else if (error instanceof Error) {
-      console.log(error.message);
-      throw new Error(`[MODULES_ERROR]: ${error.message}`);
-    } else if (typeof error === 'string') {
-      console.log(error);
-      throw new Error(`[MODULES_ERROR]: ${error}`);
-    } else {
-      console.log(error);
-      throw new Error(`[MODULES_ERROR]: ${JSON.stringify(error)}`);
-    }
+    handleError(error);
+  }
+};
+
+export const fetchModuleById = async (id: string) => {
+  try {
+    const { data } = await axios.get<IModule>(`${BASE_URL}/modules/${id}`);
+    return data;
+  } catch (error) {
+    handleError(error);
   }
 };

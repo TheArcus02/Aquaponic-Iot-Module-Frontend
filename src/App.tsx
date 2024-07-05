@@ -7,11 +7,15 @@ import ModuleDetails from './pages/module-details';
 const App = () => {
   return (
     <div>
-      <Routes>
-        <Route path='/' element={<ModuleList />} />
-        <Route path='/module/:id' element={<ModuleDetails />} />
-        <Route path='*' element={<NotFound />} />
-      </Routes>
+      <img src='/luna_logo.png' alt='logo' className='mx-auto py-10' />
+
+      <main>
+        <Routes>
+          <Route path='/' element={<ModuleList />} />
+          <Route path='/modules/:id' element={<ModuleDetails />} />
+          <Route path='*' element={<NotFound />} />
+        </Routes>
+      </main>
     </div>
   );
 };

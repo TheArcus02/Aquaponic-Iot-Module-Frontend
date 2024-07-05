@@ -13,7 +13,14 @@ const ModuleList = () => {
   useReactQuerySubscription();
 
   return (
-    <div className='container mx-auto py-10'>
+    <div className='h-full flex flex-col space-y-4 p-8 container mx-auto'>
+      <div>
+        <h2 className='text-2xl font-bold tracking-tight'>Welcome back!</h2>
+        <p className='text-muted-foreground'>
+          Here are the modules you have access to.
+        </p>
+      </div>
+
       <DataTable
         columns={columns}
         data={data || []}
