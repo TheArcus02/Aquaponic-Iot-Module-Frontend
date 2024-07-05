@@ -1,38 +1,23 @@
 import { columns } from '@/components/columns';
 import { DataTable } from '@/components/data-table';
-
-function getData(): IModule[] {
-  return [
-    {
-      id: '1',
-      name: 'Module 1',
-      description: 'Module 1 description',
-      available: true,
-      targetTemperature: 20,
-    },
-    {
-      id: '2',
-      name: 'Module 2',
-      description: 'Module 2 description',
-      available: false,
-      targetTemperature: 20,
-    },
-    {
-      id: '3',
-      name: 'Module 3',
-      description: 'Module 3 description',
-      available: true,
-      targetTemperature: 20,
-    },
-  ];
-}
+import { fetchModules } from '@/lib/api';
+import { useQuery } from '@tanstack/react-query';
 
 const ModuleList = () => {
-  const data = getData();
+  const { data, status, error, isFetching } = useQuery({
+    queryKey: ['modules'],
+    queryFn: fetchModules,
+  });
 
   return (
     <div className='container mx-auto py-10'>
-      <DataTable columns={columns} data={data} />
+      <DataTable
+        columns={columns}
+        data={data || []}
+        error={error || undefined}
+        isFetching={isFetching}
+        status={status}
+      />
     </div>
   );
 };

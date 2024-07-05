@@ -3,10 +3,9 @@ import { DataTableColumnHeader } from './data-table-column-header';
 
 export const columns: ColumnDef<IModule>[] = [
   {
-    accessorKey: 'id',
-    header: ({ column }) => {
-      return <DataTableColumnHeader column={column} title='#' />;
-    },
+    id: 'index',
+    header: '#',
+    cell: (info) => info.row.index + 1,
   },
   {
     accessorKey: 'name',
