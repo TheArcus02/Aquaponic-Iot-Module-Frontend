@@ -18,6 +18,7 @@ export const columns: ColumnDef<IModule>[] = [
     header: ({ column }) => {
       return <DataTableColumnHeader column={column} title='Available' />;
     },
+    cell: (info) => (info.getValue() ? 'Yes' : 'No'),
   },
   {
     accessorKey: 'targetTemperature',
@@ -25,6 +26,22 @@ export const columns: ColumnDef<IModule>[] = [
       return (
         <DataTableColumnHeader column={column} title='Target Temperature' />
       );
+    },
+  },
+  {
+    accessorKey: 'temperature',
+    header: ({ column }) => {
+      return <DataTableColumnHeader column={column} title='Temperature' />;
+    },
+    cell: (info) => {
+      const currentTemp = info.getValue() as Pick<IModule, 'temperature'>;
+      if (currentTemp === undefined) return 'N/A';
+
+      const targetTemp = info.row.original.targetTemperature;
+      const diff = Math.abs((currentTemp as number) - targetTemp);
+      const color = diff > 0.5 ? 'text-red-500' : 'text-green-500';
+
+      return <span className={color}>{String(currentTemp)}°C</span>;
     },
   },
 ];

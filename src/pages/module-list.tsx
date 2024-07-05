@@ -1,5 +1,6 @@
-import { columns } from '@/components/columns';
-import { DataTable } from '@/components/data-table';
+import { columns } from '@/components/data-table/columns';
+import { DataTable } from '@/components/data-table/data-table';
+import { useReactQuerySubscription } from '@/hooks/use-react-query-subscription';
 import { fetchModules } from '@/lib/api';
 import { useQuery } from '@tanstack/react-query';
 
@@ -8,6 +9,8 @@ const ModuleList = () => {
     queryKey: ['modules'],
     queryFn: fetchModules,
   });
+
+  useReactQuerySubscription();
 
   return (
     <div className='container mx-auto py-10'>
