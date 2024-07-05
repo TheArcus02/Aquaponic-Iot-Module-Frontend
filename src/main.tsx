@@ -22,7 +22,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <ThemeProvider defaultTheme='dark' storageKey='vite-ui-theme'>
+        <ThemeProvider defaultTheme='light' storageKey='vite-ui-theme'>
           <App />
         </ThemeProvider>
       </BrowserRouter>

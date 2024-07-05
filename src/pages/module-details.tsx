@@ -12,34 +12,36 @@ import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Edit } from 'lucide-react';
+import HistoricalChart from '@/components/historical-data-chart';
 
 const ModuleDetails = () => {
   const { id } = useParams();
 
-  const { data, isLoading, error } = useQuery({
+  const {
+    data: moduleData,
+    isLoading: isModuleDataLoading,
+    error: moduleDataError,
+  } = useQuery({
     queryKey: ['module', id],
     queryFn: () => fetchModuleById(id!),
   });
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isModuleDataLoading) return <div>Loading...</div>;
 
-  if (error) return <div>Error: {error.message}</div>;
+  if (moduleDataError) return <div>Error: {moduleDataError.message}</div>;
 
   return (
-    <div className='max-w-xl mx-auto py-10'>
+    <div className='max-w-6xl mx-auto py-10'>
       <Card>
         <CardHeader>
-          <CardTitle>{data?.name}</CardTitle>
-          <CardDescription>{data?.description}</CardDescription>
+          <CardTitle>{moduleData?.name}</CardTitle>
+          <CardDescription>{moduleData?.description}</CardDescription>
         </CardHeader>
         <CardContent>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum
-          iure, itaque repellendus numquam reiciendis repudiandae corrupti
-          debitis provident molestias accusantium quas earum hic aspernatur
-          assumenda asperiores, animi laborum officiis consectetur.
+          <HistoricalChart moduleId={id!} />
         </CardContent>
         <CardFooter>
-          <Button disabled={!data?.available}>
+          <Button disabled={!moduleData?.available}>
             <Edit className='mr-2 h-4 w-4' /> Edit Module
           </Button>
         </CardFooter>

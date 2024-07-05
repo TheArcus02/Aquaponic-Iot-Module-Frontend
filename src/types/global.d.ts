@@ -12,6 +12,11 @@ declare global {
     id: string;
     temperature: number;
   }
+
+  interface IModuleHistory {
+    timestamp: string;
+    temperature: number;
+  }
 }
 
 export {};

@@ -20,3 +20,26 @@ export const fetchModuleById = async (id: string) => {
     handleError(error);
   }
 };
+
+export const fetchModuleHistory = async (
+  id: string,
+  start: string,
+  stop: string,
+  mode: 'hourly' | 'daily'
+) => {
+  try {
+    const { data } = await axios.get<IModuleHistory[]>(
+      `${BASE_URL}/modules/${id}/history`,
+      {
+        params: {
+          start,
+          stop,
+          mode,
+        },
+      }
+    );
+    return data;
+  } catch (error) {
+    handleError(error);
+  }
+};
