@@ -74,7 +74,7 @@ const ModuleDetails = () => {
 
       <Card>
         <CardHeader>
-          <div className='flex flex-row items-center justify-between space-y-0'>
+          <div className='flex flex-col space-y-4 md:flex-row items-center justify-between md:space-y-0'>
             <CardTitle className='flex items-center'>
               {module?.name}
               {!module?.available ? (
@@ -91,7 +91,11 @@ const ModuleDetails = () => {
               description={module?.description}
               targetTemperature={module?.targetTemperature}
             >
-              <Button disabled={!module?.available}>
+              <Button
+                disabled={!module?.available}
+                size='sm'
+                className='w-full md:w-max'
+              >
                 <Edit className='mr-2 h-4 w-4' /> Edit Module
               </Button>
             </ModuleEditDialog>

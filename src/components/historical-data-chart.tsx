@@ -6,7 +6,6 @@ import {
   Line,
   XAxis,
   YAxis,
-  CartesianGrid,
   Tooltip,
   Legend,
   ResponsiveContainer,
@@ -23,14 +22,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from './ui/select';
-import { PropagateLoader } from 'react-spinners';
 import ErrorCard from './error-card';
 import Loader from './loader';
 
 const HistoricalChart = ({ moduleId }: { moduleId: string }) => {
+  const currentDate = new Date();
+  const oneMonthAhead = new Date();
+  oneMonthAhead.setMonth(currentDate.getMonth() + 1);
+
   const [dateRange, setDateRange] = React.useState<DateRange | undefined>({
-    from: new Date('2024-05-01T00:00:00.000Z'),
-    to: new Date('2024-06-02T00:00:00.000Z'),
+    from: currentDate,
+    to: oneMonthAhead,
   });
   const [mode, setMode] = React.useState<'hourly' | 'daily'>('daily');
 
@@ -62,7 +64,7 @@ const HistoricalChart = ({ moduleId }: { moduleId: string }) => {
 
   return (
     <div className='space-y-4'>
-      <div className='flex justify-between'>
+      <div className='flex flex-col space-y-3 md:flex-row md:justify-between'>
         <DatePickerWithRange
           dateRange={dateRange}
           setDateRange={setDateRange}
@@ -72,7 +74,7 @@ const HistoricalChart = ({ moduleId }: { moduleId: string }) => {
           value={mode}
           onValueChange={(value) => setMode(value as 'hourly' | 'daily')}
         >
-          <SelectTrigger className='w-[180px]'>
+          <SelectTrigger className='md:w-[180px]'>
             <SelectValue placeholder='Select mode' />
           </SelectTrigger>
           <SelectContent>
@@ -86,7 +88,6 @@ const HistoricalChart = ({ moduleId }: { moduleId: string }) => {
       </div>
       <ResponsiveContainer width='100%' height={400}>
         <LineChart data={data}>
-          {/* <CartesianGrid strokeDasharray='3 3' /> */}
           <XAxis dataKey='timestamp' tickFormatter={formatXAxis} />
           <YAxis domain={getYAxisDomain()} />
           <Tooltip
