@@ -43,3 +43,15 @@ export const fetchModuleHistory = async (
     handleError(error);
   }
 };
+
+export const updateModule = async (id: string, data: Partial<IModule>) => {
+  try {
+    const { data: updatedModule } = await axios.patch<IModule>(
+      `${BASE_URL}/modules/${id}`,
+      data
+    );
+    return updatedModule;
+  } catch (error) {
+    handleError(error);
+  }
+};

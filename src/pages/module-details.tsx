@@ -1,9 +1,7 @@
-import * as React from 'react';
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
@@ -11,13 +9,14 @@ import { fetchModuleById } from '@/lib/api';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, Edit, Thermometer } from 'lucide-react';
+import { AreaChart, ArrowLeft, Edit, Thermometer } from 'lucide-react';
 import HistoricalChart from '@/components/historical-data-chart';
 import ErrorCard from '@/components/error-card';
 import Loader from '@/components/loader';
 import FeatureCard from '@/components/feature-card';
 import { useReactQuerySubscription } from '@/hooks/use-react-query-subscription';
 import { Badge } from '@/components/ui/badge';
+import ModuleEditDialog from '@/components/module-edit-dialog';
 
 const CurrentTempCardContent = ({ data }: { data: IModule }) => {
   if (data?.temperature === undefined)
@@ -86,9 +85,16 @@ const ModuleDetails = () => {
                 <Badge className='ml-2'>Avaliable</Badge>
               )}
             </CardTitle>
-            <Button disabled={!module?.available}>
-              <Edit className='mr-2 h-4 w-4' /> Edit Module
-            </Button>
+            <ModuleEditDialog
+              id={module?.id!}
+              name={module?.name}
+              description={module?.description}
+              targetTemperature={module?.targetTemperature}
+            >
+              <Button disabled={!module?.available}>
+                <Edit className='mr-2 h-4 w-4' /> Edit Module
+              </Button>
+            </ModuleEditDialog>
           </div>
           <CardDescription className='max-w-3xl'>
             {module?.description}
@@ -114,8 +120,9 @@ const ModuleDetails = () => {
             </FeatureCard>
           </div>
           <Card>
-            <CardHeader>
+            <CardHeader className='flex flex-row items-center justify-between space-y-0'>
               <CardTitle>Historical Temperature Data</CardTitle>
+              <AreaChart className='w-4 h-4 mr-2 text-muted-foreground' />
             </CardHeader>
             <CardContent>
               <HistoricalChart moduleId={id!} />

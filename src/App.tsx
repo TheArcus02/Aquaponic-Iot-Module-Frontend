@@ -1,8 +1,8 @@
-import * as React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import NotFound from './pages/not-found';
 import ModuleList from './pages/module-list';
 import ModuleDetails from './pages/module-details';
+import { Toaster } from 'sonner';
 
 const App = () => {
   return (
@@ -16,6 +16,9 @@ const App = () => {
           <Route path='*' element={<NotFound />} />
         </Routes>
       </main>
+      <Toaster richColors />
+
+      <footer></footer>
     </div>
   );
 };
