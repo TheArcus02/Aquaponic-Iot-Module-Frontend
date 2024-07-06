@@ -25,6 +25,7 @@ import {
 } from './ui/select';
 import { PropagateLoader } from 'react-spinners';
 import ErrorCard from './error-card';
+import Loader from './loader';
 
 const HistoricalChart = ({ moduleId }: { moduleId: string }) => {
   const [dateRange, setDateRange] = React.useState<DateRange | undefined>({
@@ -53,12 +54,7 @@ const HistoricalChart = ({ moduleId }: { moduleId: string }) => {
     return [Math.floor(min - 1), Math.ceil(max + 1)];
   };
 
-  if (isLoading)
-    return (
-      <div className='flex items-center justify-center h-96'>
-        <PropagateLoader color='#22B357' />
-      </div>
-    );
+  if (isLoading) return <Loader />;
 
   if (error) {
     return <ErrorCard error={error} action={refetch} />;

@@ -12,6 +12,16 @@ export const useReactQuerySubscription = () => {
 
     socket.on('moduleUpdate', (data: IModuleUpdate[]) => {
       data.forEach((update: IModuleUpdate) => {
+        // Update single module
+        queryClient.setQueryData(['module', update.id], (oldData: any) => {
+          if (!oldData) return null;
+          return {
+            ...oldData,
+            temperature: update.temperature,
+          };
+        });
+
+        // Update all modules
         queryClient.setQueryData<IModule[]>(['modules'], (oldData) => {
           if (!oldData) return [];
           return oldData.map((module) =>

@@ -17,7 +17,7 @@ const ErrorCard = ({
   action?: () => void;
 }) => {
   return (
-    <Card>
+    <Card className='max-w-xl'>
       <CardHeader>
         <CardTitle className='flex space-x-2 items-center'>
           <ServerCrash className='w-4 h-4' /> <span>Error occured</span>
