@@ -13,6 +13,7 @@ import { useParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Edit } from 'lucide-react';
 import HistoricalChart from '@/components/historical-data-chart';
+import ErrorCard from '@/components/error-card';
 
 const ModuleDetails = () => {
   const { id } = useParams();
