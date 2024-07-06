@@ -3,6 +3,7 @@ import { Separator } from './ui/separator';
 import { cn } from '@/lib/utils';
 import { buttonVariants } from './ui/button';
 import { Github } from 'lucide-react';
+import { ModeToggle } from './mode-toggle';
 
 const Footer = () => {
   return (
@@ -14,7 +15,7 @@ const Footer = () => {
             'py-6',
             buttonVariants({ variant: 'ghost', size: 'icon' })
           )}
-          to='https://github.com/TheArcus02/Aquaponic-Iot-Module-API'
+          to='https://github.com/TheArcus02/Aquaponic-Iot-Module-Frontend'
           target='_blank'
         >
           <Github className='h-6 w-6' />
@@ -23,6 +24,7 @@ const Footer = () => {
           &copy; {new Date().getFullYear()} Luna Scientific. All rights
           reserved.
         </p>
+        <ModeToggle />
       </footer>
     </>
   );

@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Link, Route, Routes } from 'react-router-dom';
 import NotFound from './pages/not-found';
 import ModuleList from './pages/module-list';
 import ModuleDetails from './pages/module-details';
@@ -8,7 +8,9 @@ import Footer from './components/footer';
 const App = () => {
   return (
     <div className='flex flex-col min-h-screen'>
-      <img src='/luna_logo.png' alt='logo' className='mx-auto py-10' />
+      <Link to='/'>
+        <img src='/luna_logo.png' alt='logo' className='mx-auto py-10' />
+      </Link>
 
       <main className='flex-1'>
         <Routes>

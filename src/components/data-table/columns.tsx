@@ -42,7 +42,15 @@ export const columns: ColumnDef<IModule>[] = [
       const diff = Math.abs((currentTemp as number) - targetTemp);
       const color = diff > 0.5 ? 'text-destructive' : 'text-green-500';
 
-      return <span className={color}>{String(currentTemp)}°C</span>;
+      return (
+        <div className='text-sm'>
+          <span className={color}>{String(currentTemp)}°C</span>
+          <span className='text-xs text-muted-foreground'>
+            {' '}
+            (±{diff.toFixed(2)}°)
+          </span>
+        </div>
+      );
     },
   },
 ];

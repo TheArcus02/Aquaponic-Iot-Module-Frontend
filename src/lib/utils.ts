@@ -9,17 +9,15 @@ export function cn(...inputs: ClassValue[]) {
 export function handleError(error: any) {
   if (error instanceof AxiosError) {
     console.log(error.response?.data);
-    throw new Error(
-      `[MODULES_ERROR]: ${error.response?.data.error_name} - ${error.response?.data.error_message}`
-    );
+    throw new Error(error.response?.data);
   } else if (error instanceof Error) {
     console.log(error.message);
-    throw new Error(`[MODULES_ERROR]: ${error.message}`);
+    throw new Error(error.message);
   } else if (typeof error === 'string') {
     console.log(error);
-    throw new Error(`[MODULES_ERROR]: ${error}`);
+    throw new Error(error);
   } else {
     console.log(error);
-    throw new Error(`[MODULES_ERROR]: ${JSON.stringify(error)}`);
+    throw new Error(JSON.stringify(error));
   }
 }
